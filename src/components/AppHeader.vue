@@ -8,13 +8,20 @@ export default {
             store,
 
             searchApi() {
-        let ApiUrl = this.store.endpoint + this.store.search
+        let ApiUrl = this.store.endpoint_film + this.store.search
         console.log(ApiUrl)
 
         axios.get(ApiUrl).then((response) => {
-        this.store.searchResult = response.data.results
-        console.log(this.store.searchResult)
-      })
+        this.store.searchResult_film = response.data.results
+        console.log(this.store.searchResult_film)
+
+        let ApiUrl_serietv = this.store.endpoint_serietv + this.store.search
+        console.log(ApiUrl_serietv)
+
+        axios.get(ApiUrl_serietv).then((response) => {
+        this.store.searchResult_serietv = response.data.results
+        console.log(this.store.searchResult_serietv)
+        })})
       }
         }
     },
