@@ -6,8 +6,12 @@ data() {
     return {
         store,
 
-        flags(){
-        console.log(store.searchResult)}
+        methods: {
+    generateStars(voteAverage) {
+      // Arrotonda il voto alla cifra intera più vicina e poi divide per 2
+      const stars = Math.round(voteAverage) / 2;
+      return stars
+    }}
     }
 },
 }
@@ -31,6 +35,7 @@ data() {
         <img :src="'/src/img/' + serietv.original_language + '.png'" alt="">
     </div>
     <div> vote_average: {{ serietv.vote_average}}</div>
+    <div> <img :src=" store.poster + serietv.poster_path" alt=""></div>
     </div>
 </template>
 
