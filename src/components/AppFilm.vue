@@ -2,18 +2,18 @@
 import { store } from '../store.js'
 
 export default {
-data() {
+  data() {
     return {
-        store,
-
-        methods: {
+      store,
+    };
+  },
+  methods: {
     generateStars(voteAverage) {
       // Arrotonda il voto alla cifra intera più vicina e poi divide per 2
-      const stars = Math.round(voteAverage) / 2;
-      return stars
-    }}
-    }
-},
+      const stars = Math.floor(voteAverage) / 2;
+      return stars;
+    },
+  },
 }
 </script>
 
@@ -24,8 +24,21 @@ data() {
     <div> original_language: {{ film.original_language}}
         <img :src="'/src/img/' + film.original_language + '.png'" alt="">
     </div>
-    <div> vote_average: {{ film.vote_average}}</div>
+    <div class="d_flex">
+        <ul class="d_flex" style="flex-direction: row;">
+   <i v-if="generateStars( film.vote_average ) >= 1" class="fa-solid fa-star"></i>
+    <i v-else class="fa-regular fa-star"></i>
+   <i v-if="generateStars( film.vote_average ) >= 2" class="fa-solid fa-star"></i>
+    <i v-else class="fa-regular fa-star"></i>
+   <i v-if="generateStars( film.vote_average ) >= 3" class="fa-solid fa-star"></i>
+    <i v-else class="fa-regular fa-star"></i>
+   <i v-if="generateStars( film.vote_average ) >= 4" class="fa-solid fa-star"></i>
+    <i v-else class="fa-regular fa-star"></i>
+   <i v-if="generateStars( film.vote_average ) >= 5" class="fa-solid fa-star"></i>
+    <i v-else class="fa-regular fa-star"></i>
+</ul>
     </div>
+ </div>
    <h1>SERIE TV</h1>
     <div class="m-5" v-for="(serietv, index) in store.searchResult_serietv" :key="index"> 
           

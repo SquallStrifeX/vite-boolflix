@@ -22,6 +22,7 @@ export default {
         this.store.searchResult_serietv = response.data.results
         console.log(this.store.searchResult_serietv)
         })})
+
       }
         }
     },
