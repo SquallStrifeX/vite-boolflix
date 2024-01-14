@@ -23,9 +23,9 @@ export default {
     <div> Original Title: {{ film.original_title}}</div>
     <div> original_language: {{ film.original_language}}
         <img :src="'/src/img/' + film.original_language + '.png'" alt="">
+    <div> <img :src=" store.poster + film.poster_path" alt=""></div>
+
     </div>
-    <div class="d_flex">
-        <ul class="d_flex" style="flex-direction: row;">
    <i v-if="generateStars( film.vote_average ) >= 1" class="fa-solid fa-star"></i>
     <i v-else class="fa-regular fa-star"></i>
    <i v-if="generateStars( film.vote_average ) >= 2" class="fa-solid fa-star"></i>
@@ -36,8 +36,6 @@ export default {
     <i v-else class="fa-regular fa-star"></i>
    <i v-if="generateStars( film.vote_average ) >= 5" class="fa-solid fa-star"></i>
     <i v-else class="fa-regular fa-star"></i>
-</ul>
-    </div>
  </div>
    <h1>SERIE TV</h1>
     <div class="m-5" v-for="(serietv, index) in store.searchResult_serietv" :key="index"> 
@@ -47,8 +45,17 @@ export default {
     <div> original_language: {{ serietv.original_language}}
         <img :src="'/src/img/' + serietv.original_language + '.png'" alt="">
     </div>
-    <div> vote_average: {{ serietv.vote_average}}</div>
     <div> <img :src=" store.poster + serietv.poster_path" alt=""></div>
+    <i v-if="generateStars( serietv.vote_average ) >= 1" class="fa-solid fa-star"></i>
+    <i v-else class="fa-regular fa-star"></i>
+   <i v-if="generateStars( serietv.vote_average ) >= 2" class="fa-solid fa-star"></i>
+    <i v-else class="fa-regular fa-star"></i>
+   <i v-if="generateStars( serietv.vote_average ) >= 3" class="fa-solid fa-star"></i>
+    <i v-else class="fa-regular fa-star"></i>
+   <i v-if="generateStars( serietv.vote_average ) >= 4" class="fa-solid fa-star"></i>
+    <i v-else class="fa-regular fa-star"></i>
+   <i v-if="generateStars( serietv.vote_average ) >= 5" class="fa-solid fa-star"></i>
+    <i v-else class="fa-regular fa-star"></i>
     </div>
 </template>
 
