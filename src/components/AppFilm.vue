@@ -1,20 +1,32 @@
 <script>
-import { store } from '../store.js'
-
-export default {
-  data() {
-    return {
-      store,
-    };
-  },
-  methods: {
-    generateStars(voteAverage) {
-      // Arrotonda il voto alla cifra intera più vicina e poi divide per 2
-      const stars = Math.floor(voteAverage) / 2;
-      return stars;
+  import { store } from '../store.js'
+  import axios from 'axios'
+  export default {
+    data() {
+      return {
+        store,
+      };
     },
-  },
-}
+    methods: {
+      generateStars(voteAverage) {
+        // Arrotonda il voto alla cifra intera più vicina e poi divide per 2
+        const stars = Math.floor(voteAverage) / 2;
+        return stars;
+      },
+      genre_id() {
+        axios.get(store.endpoint_genre_id).then((response) => {
+          this.store.genre_id = response.data.genres;
+          console.log(this.store.genre_id);
+
+        });
+        
+      },
+    },
+    mounted() {
+      // Chiamare la funzione genre_id all'avvio della pagina
+      this.genre_id();
+    },
+  };
 </script>
 
 <template lang="">
@@ -40,6 +52,16 @@ export default {
     <i v-else class="fa-regular fa-star"></i>
    <i v-if="generateStars( film.vote_average ) >= 5" class="fa-solid fa-star"></i>
     <i v-else class="fa-regular fa-star"></i>
+    <div v-for="(genre, index) in store.genre_id" :key="index">
+    <div v-if="(genre.id == film.genre_ids[0])">{{genre.name}}</div>
+    <div v-if="(genre.id == film.genre_ids[1])">{{genre.name}}</div>
+    <div v-if="(genre.id == film.genre_ids[2])">{{genre.name}}</div>
+    <div v-if="(genre.id == film.genre_ids[3])">{{genre.name}}</div>
+    <div v-if="(genre.id == film.genre_ids[4])">{{genre.name}}</div>
+
+
+
+  </div>
     </div>
   </div>
 </div>
@@ -85,12 +107,12 @@ export default {
 
 <style lang="scss" scoped>
 .title{
-  font-size: 30px;
+  font-size: 20px;
   margin-top: 20px
 }
 
 .original_title{
-  font-size: 20px;
+  font-size: 10px;
   margin-top: 10px
 }
     /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
