@@ -30,14 +30,30 @@ export default {
 </script>
 
 <template lang="">
-    <div>
-        <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" v-model="store.search">
-  <button class="btn btn-success" @click="searchApi()">ammacca me fra</button>
+    <header class="bg-black">
+    <div class=" p-3 container ">
+        <div class="row ">
+            <div class="col-6 logo">
+                BOOFLIX
+            </div>
+            <div class="col-3"></div>
+            <div class="col-3">
+                <div class="input-group rounded">
+  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" v-model="store.search" @keyup.enter="searchApi()" />
+  <span class="input-group-text border-0" id="search-addon">
+    <i class="fas fa-search"></i>
+  </span>
+</div>
+</div>
 </div>
     </div>
+    </header>
 </template>
 
-<style lang="">
+<style lang="scss" scoped>
+.logo{
+    color: red;
+    font-size: 30px;
+}
     
 </style>
