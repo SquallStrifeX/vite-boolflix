@@ -51,9 +51,6 @@
       <img class="img-fluid" :src=" store.poster + film.poster_path" alt="">
     </div>
     <div class="flip-card-back">
-      <div v-if="this.store.filmCredits">
-  {{ credits(film.id) }}
-</div>
       <div class="title">{{ film.title}}</div>
     <div class="original_title m-3">  {{ film.original_title}}</div>
        <div><img class="flag m-3" :src="'/src/img/' + film.original_language + '.png'" alt=""></div> 
@@ -80,7 +77,6 @@
   </div>
 </div>
 
-  </div>
     </div>
   </div>
 </div>
