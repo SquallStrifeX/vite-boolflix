@@ -1,32 +1,37 @@
 <script>
 import { store } from '../store.js'
-import axios from 'axios'
+import axios from 'axios';
+
 export default {
-    name: 'AppHeader',
-    data() {
-        return {
-            store,
+  name: 'AppHeader',
+  data() {
+    return {
+      store,
+    };
+  },
+  methods: {
+    searchApi() {
+      let ApiUrl = this.store.endpoint_film + this.store.search;
+      console.log(ApiUrl);
 
-            searchApi() {
-        let ApiUrl = this.store.endpoint_film + this.store.search
-        console.log(ApiUrl)
+      axios.get(ApiUrl).then((response) => {
+        this.store.searchResult_film = response.data.results;
+        console.log(this.store.searchResult_film);
 
-        axios.get(ApiUrl).then((response) => {
-        this.store.searchResult_film = response.data.results
-        console.log(this.store.searchResult_film)
-
-        let ApiUrl_serietv = this.store.endpoint_serietv + this.store.search
-        console.log(ApiUrl_serietv)
+        let ApiUrl_serietv = this.store.endpoint_serietv + this.store.search;
+        console.log(ApiUrl_serietv);
 
         axios.get(ApiUrl_serietv).then((response) => {
-        this.store.searchResult_serietv = response.data.results
-        console.log(this.store.searchResult_serietv)
-        })})
-
-      }
-        }
+          this.store.searchResult_serietv = response.data.results;
+          console.log(this.store.searchResult_serietv);
+        });
+      });
     },
-}
+  },
+  mounted() {
+    this.searchApi();
+  },
+};
 </script>
 
 <template lang="">

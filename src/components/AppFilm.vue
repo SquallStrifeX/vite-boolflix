@@ -21,10 +21,22 @@
         });
         
       },
+      credits(movie_id) {
+        store.endpoint_credits = 'https://api.themoviedb.org/3/movie/' + movie_id + '/credits?api_key=e99307154c6dfb0b4750f6603256716d' 
+        console.log(this.store.endpoint_credits);
+        axios.get(this.store.endpoint_credits).then((response) => {
+          this.store.credits = response.data.cast;
+          console.log(this.store.credits)
+         
+
+        });
+        
+      },
     },
     mounted() {
       // Chiamare la funzione genre_id all'avvio della pagina
-      this.genre_id();
+      this.genre_id();+
+      this.credits();
     },
   };
 </script>
@@ -32,13 +44,16 @@
 <template lang="">
   <div class="container">
     <div class="row">
-      <div class="col-3 mt-5" v-for="(film, index) in store.searchResult_film" :key="index">
+      <div class="col-3 mt-5" v-for="(film, index) in store.searchResult_film" :key="index" >
         <div class="flip-card">
   <div class="flip-card-inner">
     <div class="flip-card-front">
       <img class="img-fluid" :src=" store.poster + film.poster_path" alt="">
     </div>
     <div class="flip-card-back">
+      <div v-if="this.store.filmCredits">
+  {{ credits(film.id) }}
+</div>
       <div class="title">{{ film.title}}</div>
     <div class="original_title m-3">  {{ film.original_title}}</div>
        <div><img class="flag m-3" :src="'/src/img/' + film.original_language + '.png'" alt=""></div> 
@@ -58,8 +73,12 @@
     <div v-if="(genre.id == film.genre_ids[2])">{{genre.name}}</div>
     <div v-if="(genre.id == film.genre_ids[3])">{{genre.name}}</div>
     <div v-if="(genre.id == film.genre_ids[4])">{{genre.name}}</div>
-
-
+  <div v-if="credits.id === film.id">
+    <div v-for="(actor, actorIndex) in credits" :key="actorIndex">
+      <div>{{ actor.name }}</div>
+    </div>
+  </div>
+</div>
 
   </div>
     </div>
